@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vrp-baselines"
+dynamic = ["version"]
+description = "Solve CVRPLIB instances with standard baselines (savings, OR-Tools, HGS) and report verified gaps to the best known solution."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Jonas Grau" }]
+requires-python = ">=3.10"
+dependencies = [
+    "routeviz @ git+https://github.com/jonasgrau/routeviz@c61071c901ade704a79d7af544b98d49df84867b",
+    "ortools>=9.8",
+]
+keywords = ["vehicle routing", "cvrp", "cvrplib", "benchmark", "operations research"]
+
+[project.optional-dependencies]
+hgs = ["hygese>=0.1"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+vrp-baselines = "vrp_baselines.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jonasgrau/vrp-baselines"
+
+[tool.hatch.version]
+path = "src/vrp_baselines/__init__.py"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vrp_baselines"]
